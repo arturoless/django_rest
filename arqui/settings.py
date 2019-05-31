@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.43.99']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -155,13 +155,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 try: 
-    from arqui.local_settings import *
+    from local_settings import *
 except ImportError:
     pass
 
 if not DEBUG:
     SECRET_KEY="SECRET_KEY"
-    DATABASE={
+    DATABASES={
        'default': {
             'ENGINE' : 'django.db.backends.postgresql_psycopg2',
             'NAME' : 'DB_NAME',
@@ -171,5 +171,5 @@ if not DEBUG:
             'PORT': 'DB_PORT'
         } 
     }
-    import django_heroku
-    django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())
