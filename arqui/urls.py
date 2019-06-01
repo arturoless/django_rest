@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
 #heroku
-from django.config import settings
-from django.config.urls.static import static
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
