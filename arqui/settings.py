@@ -1,7 +1,7 @@
 # Paqueterias a instalar
 # # pip install django-heroku
 # # dj-database-url
-# # gunicorn
+# # pip gunicorn
 # # whitenoise
 # # python-decouple
 
