@@ -138,26 +138,26 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-try:
-    from arqui.local_settings import *
-except ImportError:
-    pass
+# try:
+#     from arqui.local_settings import *
+# except ImportError:
+#     pass
 
-if not DEBUG:
-    SECRET_KEY = 'SECRET_KEY'
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=config('DATABASE_URL')
-        )
-        # 'default': {
-        #     'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        #     'NAME' : 'DB_NAME',
-        #     'USER': 'DB_USER',
-        #     'PASSWORD': 'DB_PASSWORD',
-        #     'HOST': 'DB_HOST',
-        #     'PORT': 'DB_PORT'
-        # }
-    } 
+# if not DEBUG:
+#     SECRET_KEY = 'SECRET_KEY'
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+    # 'default': {
+    #     'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+    #     'NAME' : 'DB_NAME',
+    #     'USER': 'DB_USER',
+    #     'PASSWORD': 'DB_PASSWORD',
+    #     'HOST': 'DB_HOST',
+    #     'PORT': 'DB_PORT'
+    # }
+} 
 
     # import django_heroku
     # django_heroku.settings(locals())
