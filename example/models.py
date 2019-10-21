@@ -25,4 +25,17 @@ class Example2(models.Model):
     class Meta:
         db_table = 'Example2'
 
+class Imagen(models.Model):
+    model_pic1 = models.ImageField(upload_to = 'pic_folder/')
+    model_pic2 = models.ImageField(upload_to = 'pic_folder/')
+    model_pic3 = models.ImageField(upload_to = 'pic_folder/')
+    delete = models.BooleanField(default=False)
+    create = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'Imagen'
+
 

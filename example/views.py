@@ -7,6 +7,9 @@ from rest_framework import status
 from rest_framework import generics
 
 from example.models import Example
+from example.forms import ImageUploadForm
+
+from example.models import Imagen
 
 from example.serializer import ExampleSerializers
 
@@ -17,5 +20,11 @@ class ExampleList(APIView):
         serializer = ExampleSerializers(queryset)
         return Response(serializer.data)
 
-
+class ImagenList(APIView):
+    def post(self, request):
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return Response('image upload success')
+        return Response('allowed only via POST')
 # Create your views here.
