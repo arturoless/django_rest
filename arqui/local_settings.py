@@ -25,7 +25,7 @@ SECRET_KEY = '-(!w4wx5fc34(gk703+u40_sctk-m406q^ibl)(f27t!snw45#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-3-86-201-131.compute-1.amazonaws.com','3.86.201.131']
+ALLOWED_HOSTS = ['ec2-3-86-201-131.compute-1.amazonaws.com','3.86.201.131','127.0.0.1']
 
 
 # Application definition
@@ -98,10 +98,34 @@ WSGI_APPLICATION = 'arqui.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'osfinal',
+        'USER': 'arturoless',
+        'PASSWORD': 'arturoless',
+        'HOST': 'osfinal.cmbcdhtutvwv.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'sql_server.pyodbc',
+#         'NAME': 'operativo',
+#         'HOST': 'database-1.cmbcdhtutvwv.us-east-1.rds.amazonaws.com',
+#         'USER': 'admin',
+#         'PASSWORD': 'arturoless',
+
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 11 for SQL Server',
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
