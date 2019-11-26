@@ -40,7 +40,7 @@ class PersonList(APIView):
         serializer = PersonSerializers(persons, many=True)
         return Response(serializer.data)
     def post(self, request):
-        form = PersonUploadForm(request.POST, request.FILES)
+        form = PersonUploadForm(request.data, request.FILES)
         if form.is_valid():
             form.save()
             return Response('ok')
@@ -50,16 +50,16 @@ class PersonView(APIView):
 
     
     
-    def put(self, request, id):
+    def put(self, request, id, format=None):
         person_id = int(id)
         try:
             person = Person.objects.get(id = person_id)
         except ObjectDoesNotExist:
-           return Response('nok')
-        form = PersonUploadForm(request.POST, instance = person)
+           return Response('does not exist')
+        form = PersonUploadForm(request.data, instance = person)
         if form.is_valid():
             form.save()
-            return Response(PersonSerializers(Person.objects.get(pk=id)).data)
+            return Response('ok')
         return Response('nok')
     def get(self, request,id):
         try:
