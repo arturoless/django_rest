@@ -9,13 +9,15 @@ from rest_framework import status
 from rest_framework import generics
 
 from example.models import Example
-from example.forms import ImageUploadForm, PersonUploadForm
+from example.forms import ImageUploadForm, PersonUploadForm, CareerUploadForm
 
 from example.models import Imagen
 
 from example.models import Person
 
-from example.serializer import ExampleSerializers, PersonSerializers
+from example.models import Career
+
+from example.serializer import ExampleSerializers, PersonSerializers, CareerSerializers
 
 class ExampleList(APIView):
     # METODO GET PARA SOLICITAR INFO
@@ -37,38 +39,80 @@ class PersonList(APIView):
         persons = Person.objects.all()
         serializer = PersonSerializers(persons, many=True)
         return Response(serializer.data)
-
-class PersonView(APIView):
-
     def post(self, request):
         form = PersonUploadForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return Response('person save')
-        return Response('person does not save')
+            return Response('ok')
+        return Response('nok')
+
+class PersonView(APIView):
+
+    
     
     def put(self, request, id):
         person_id = int(id)
         try:
             person = Person.objects.get(id = person_id)
         except ObjectDoesNotExist:
-           return Response('person does not exist')
+           return Response('nok')
         form = PersonUploadForm(request.POST, instance = person)
         if form.is_valid():
             form.save()
-            return Response('person updated')
-        return Response('something is wrong')
+            return Response(PersonSerializers(Person.objects.get(pk=id)).data)
+        return Response('nok')
     def get(self, request,id):
         try:
             return Response(PersonSerializers(Person.objects.get(pk=id)).data)
         except Person.DoesNotExist:
-            return Response('person does not exist')
+            return Response('nok')
 
     def delete(self, request,id):
         person_id = int(id)
         try:
             person_sel = Person.objects.get(id = person_id)
         except Person.DoesNotExist:
-            return Response('person does not exist')
+            return Response('nok')
         person_sel.delete()
-        return Response('person deleted')
+        return Response('ok')
+
+class CareerList(APIView):
+    def get(self, request):
+        careers = Career.objects.all()
+        serializer = CareerSerializers(careers, many=True)
+        return Response(serializer.data)
+    def post(self, request):
+        form = CareerUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return Response('ok')
+        return Response('nok')
+
+class CareerView(APIView):
+
+    
+    def put(self, request, id):
+        career_id = int(id)
+        try:
+            career = Career.objects.get(id = career_id)
+        except ObjectDoesNotExist:
+           return Response('nok')
+        form = CareerUploadForm(request.POST, instance = career)
+        if form.is_valid():
+            form.save()
+            return Response(CareerSerializers(Career.objects.get(pk=id)).data)
+        return Response('nok')
+    def get(self, request,id):
+        try:
+            return Response(CareerSerializers(Career.objects.get(pk=id)).data)
+        except Career.DoesNotExist:
+            return Response('nok')
+
+    def delete(self, request,id):
+        career_id = int(id)
+        try:
+            career_sel = Career.objects.get(id = career_id)
+        except Career.DoesNotExist:
+            return Response('nok')
+        career_sel.delete()
+        return Response('ok')

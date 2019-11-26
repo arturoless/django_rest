@@ -9,4 +9,6 @@ urlpatterns = [
     re_path(r'imagen_lista/$', views.ImagenList.as_view()),
     re_path(r'person/$', views.PersonList.as_view()),
     re_path(r'person/(?P<id>\d+)$', views.PersonView.as_view()),
+    re_path(r'career/$', views.CareerList.as_view()),
+    re_path(r'career/(?P<id>\d+)$', views.CareerView.as_view()),
 ]

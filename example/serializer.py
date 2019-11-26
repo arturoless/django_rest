@@ -2,7 +2,7 @@
 from rest_framework import routers, serializers, viewsets
 
 # -------------AGREGANDO MODELOS-----------------
-from example.models import Example,Person
+from example.models import Example,Person,Career
 
 class ExampleSerializers(serializers.ModelSerializer):
     class Meta:
@@ -12,5 +12,10 @@ class ExampleSerializers(serializers.ModelSerializer):
 class PersonSerializers(serializers.ModelSerializer):
     class Meta:
         model = Person
+        fields = ('__all__')
+
+class CareerSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Career
         fields = ('__all__')
 

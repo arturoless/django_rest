@@ -1,6 +1,6 @@
 from django import forms
 
-from example.models import Person, Imagen
+from example.models import Person, Imagen,Career
 class ImageUploadForm(forms.ModelForm):
      class Meta:
         model = Imagen
@@ -9,3 +9,7 @@ class PersonUploadForm(forms.ModelForm):
      class Meta:
         model = Person
         fields = ('name', 'lastname', 'age','address','career')
+class CareerUploadForm(forms.ModelForm):
+     class Meta:
+        model = Career
+        fields = ('name', 'slug')

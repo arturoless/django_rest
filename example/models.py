@@ -44,7 +44,6 @@ class Person(models.Model):
     age = models.CharField(max_length=245)
     address = models.CharField(max_length=245)
     career = models.CharField(max_length=245)
-    delete = models.BooleanField(default=False)
     create = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
@@ -52,4 +51,15 @@ class Person(models.Model):
 
     class Meta:
         db_table = 'Person'
+    
+class Career(models.Model):
+    name = models.CharField(max_length=245)
+    slug = models.CharField(max_length=5)
+    create = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'Career'
 
