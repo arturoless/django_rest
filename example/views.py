@@ -82,7 +82,7 @@ class CareerList(APIView):
         serializer = CareerSerializers(careers, many=True)
         return Response(serializer.data)
     def post(self, request):
-        form = CareerUploadForm(request.POST, request.FILES)
+        form = CareerUploadForm(request.data, request.FILES)
         if form.is_valid():
             form.save()
             return Response('ok')
@@ -97,7 +97,7 @@ class CareerView(APIView):
             career = Career.objects.get(id = career_id)
         except ObjectDoesNotExist:
            return Response('nok')
-        form = CareerUploadForm(request.POST, instance = career)
+        form = CareerUploadForm(request.data, instance = career)
         if form.is_valid():
             form.save()
             return Response(CareerSerializers(Career.objects.get(pk=id)).data)
